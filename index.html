@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="hi">
 
 <head>
@@ -12,125 +12,62 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
     <style>
-        /* Custom CSS for full-page background image */
         body {
             background-image: url('fbg.jpg');
-            /* Path to your background image */
             background-size: cover;
-            /* Cover the entire page */
             background-position: center;
-            /* Center the background image */
             background-repeat: no-repeat;
-            /* Do not repeat the image */
             background-attachment: fixed;
-            /* Fix the background while scrolling */
         }
 
-        /* Custom CSS for animated text container */
         .animated-text-container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            /* Center the content horizontally */
         }
 
-        /* Custom CSS for animated text */
         .animated-text {
             font-weight: bold;
             font-family: 'Tiro Devanagari Hindi', serif;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             white-space: nowrap;
-            /* Prevent text from wrapping */
             overflow: hidden;
-            /* Clip overflowing text */
         }
 
         #animated-text-kalyug {
             font-size: 8rem;
             display: block;
-            /* Ensure it takes full width */
             margin-bottom: 10px;
-            /* Add 10px gap below Kalyug Patrika */
             color: black;
         }
 
         #animated-text-sanskrit {
             font-size: 2rem;
-            /* Smaller font size for Sanskrit */
             display: inline-block;
-            /* Change to inline-block */
             padding: 10px;
-            /* Add padding for spacing */
-            background-color:rgb(93, 57, 0,0.65);
-            /* Semi-transparent black background */
+            background-color: rgba(93, 57, 0, 0.65);
             color: white;
-            /* White text color */
             border-radius: 5px;
+            margin-bottom: 20px;
         }
 
-
-        /* Custom CSS to center the navbar brand and align links to the right */
-        .navbar {
-            position: relative;
-            /* Make the navbar a positioning context */
-            display: flex;
-            justify-content: center;
-            /* Center the navbar content horizontally */
-            align-items: center;
-            /* Center the navbar content vertically */
-            padding: 1.5rem 1rem;
-            /* Increase padding to increase navbar height */
-            height: 80px;
-            /* Set a fixed height for the navbar */
-            font-family: "Times New Roman", Times, serif;
-            background: rgb(93, 57, 0, 0.8);
+        .button-container {
+            margin-top: 20px;
         }
 
-        .navbar-brand {
-            position: absolute;
-            /* Position the brand absolutely */
-            left: 50%;
-            /* Move the brand to the center */
-            transform: translateX(-50%);
-            /* Adjust for the brand's width */
-            font-size: 2rem;
-            /* Adjust font size if needed */
+        .btn-custom {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
             font-weight: bold;
-            /* Make the brand text bold */
-            color: white !important;
-            /* Black color for the brand text */
-        }
-
-        .navbar-nav .nav-link {
-            font-weight: bold;
-            /* Make the links bold */
-            color: white !important;
-            /* Black color for the links */
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: blue !important;
-            /* Slightly darker black on hover */
-        }
-
-        .navbar-collapse {
-            position: absolute;
-            /* Position the collapse absolutely */
-            right: 0;
-            /* Align the collapse to the right */
-        }
-
-        .navbar-nav .nav-item {
-            margin-left: 1rem;
-            /* Add spacing between nav items */
+            border-radius: 5px;
         }
     </style>
 </head>
 
 <body class="bg-gray-100">
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
         <a class="navbar-brand" href="index.html">KALYUG PATRIKA</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -138,36 +75,28 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about.html">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="explore.html">Explore</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="narad-net.html">Narad.Net</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
+                <li class="nav-item"><a class="nav-link" href="narad-net.html">Narad.Net</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Animated Texts -->
     <div class="animated-text-container">
         <div class="animated-text" id="animated-text-kalyug"></div>
         <div class="animated-text" id="animated-text-sanskrit"></div>
+        <div class="button-container">
+            <a href="explore.html" class="btn btn-primary btn-custom">Explore</a>
+            <a href="narad-net.html" class="btn btn-secondary btn-custom">Narad.Net</a>
+        </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- JavaScript for Letter-by-Letter Animation -->
     <script>
-        // Function to animate text letter by letter
         function typeWriter(element, text, speed) {
             let i = 0;
             let interval = setInterval(function() {
@@ -180,7 +109,6 @@
             }, speed);
         }
 
-        // Animate the texts on page load
         window.onload = function() {
             const kalyugText = "कलयुग पत्रिका";
             const sanskritText = "सत्यं ज्ञेयमिति ब्रूयात्, सत्यं श्रुत्वा न मुह्यति ||";
@@ -188,8 +116,8 @@
             const animatedTextKalyug = document.getElementById("animated-text-kalyug");
             const animatedTextSanskrit = document.getElementById("animated-text-sanskrit");
 
-            typeWriter(animatedTextKalyug, kalyugText, 100); // Adjust speed as needed
-            typeWriter(animatedTextSanskrit, sanskritText, 100); // Adjust speed as needed
+            typeWriter(animatedTextKalyug, kalyugText, 100);
+            typeWriter(animatedTextSanskrit, sanskritText, 100);
         };
     </script>
 </body>
