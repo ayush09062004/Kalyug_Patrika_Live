@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="hi">
 
 <head>
@@ -40,6 +40,12 @@
             color: black;
         }
 
+        .quote-container {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+
         #animated-text-sanskrit {
             font-size: 2rem;
             display: inline-block;
@@ -47,10 +53,17 @@
             background-color: rgba(93, 57, 0, 0.65);
             color: white;
             border-radius: 5px;
-            margin-bottom: 20px;
+        }
+
+        #quote-translation {
+            font-size: 1.5rem;
+            color: black;
+            font-weight: bold;
+            margin-top: 10px;
         }
 
         .button-container {
+            display: none;
             margin-top: 20px;
         }
 
@@ -82,20 +95,20 @@
 
     <div class="animated-text-container">
         <div class="animated-text" id="animated-text-kalyug"></div>
-        <div class="animated-text" id="animated-text-sanskrit"></div>
+
+        <div class="quote-container" id="quote-container">
+            <div class="animated-text" id="animated-text-sanskrit"></div>
+            <div id="quote-translation">One must know and speak the truth; listening to the truth removes ignorance.</div>
+        </div>
     </div>
 
-    <div class="button-container text-center">
+    <div class="button-container text-center" id="button-container">
         <a href="explore.html" class="btn btn-primary btn-custom">Explore</a>
         <a href="narad-net.html" class="btn btn-secondary btn-custom">Narad.Net</a>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <script>
-        function typeWriter(element, text, speed) {
+        function typeWriter(element, text, speed, callback) {
             let i = 0;
             let interval = setInterval(function() {
                 if (i < text.length) {
@@ -103,6 +116,7 @@
                     i++;
                 } else {
                     clearInterval(interval);
+                    if (callback) callback();
                 }
             }, speed);
         }
@@ -110,14 +124,18 @@
         window.onload = function() {
             const kalyugText = "कलयुग पत्रिका";
             const sanskritText = "सत्यं ज्ञेयमिति ब्रूयात्, सत्यं श्रुत्वा न मुह्यति ||";
-
+            
             const animatedTextKalyug = document.getElementById("animated-text-kalyug");
             const animatedTextSanskrit = document.getElementById("animated-text-sanskrit");
+            const quoteContainer = document.getElementById("quote-container");
+            const buttonContainer = document.getElementById("button-container");
 
-            typeWriter(animatedTextKalyug, kalyugText, 100);
-            setTimeout(() => {
-                typeWriter(animatedTextSanskrit, sanskritText, 100);
-            }, kalyugText.length * 100);
+            typeWriter(animatedTextKalyug, kalyugText, 100, function() {
+                quoteContainer.style.display = "block"; // Show Sanskrit quote
+                typeWriter(animatedTextSanskrit, sanskritText, 100, function() {
+                    buttonContainer.style.display = "block"; // Show buttons after Sanskrit quote
+                });
+            });
         };
     </script>
 </body>
