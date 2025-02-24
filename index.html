@@ -21,11 +21,8 @@
         }
 
         .animated-text-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             text-align: center;
+            margin-top: 10vh;
         }
 
         .animated-text {
@@ -86,10 +83,11 @@
     <div class="animated-text-container">
         <div class="animated-text" id="animated-text-kalyug"></div>
         <div class="animated-text" id="animated-text-sanskrit"></div>
-        <div class="button-container">
-            <a href="explore.html" class="btn btn-primary btn-custom">Explore</a>
-            <a href="narad-net.html" class="btn btn-secondary btn-custom">Narad.Net</a>
-        </div>
+    </div>
+
+    <div class="button-container text-center">
+        <a href="explore.html" class="btn btn-primary btn-custom">Explore</a>
+        <a href="narad-net.html" class="btn btn-secondary btn-custom">Narad.Net</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -117,7 +115,9 @@
             const animatedTextSanskrit = document.getElementById("animated-text-sanskrit");
 
             typeWriter(animatedTextKalyug, kalyugText, 100);
-            typeWriter(animatedTextSanskrit, sanskritText, 100);
+            setTimeout(() => {
+                typeWriter(animatedTextSanskrit, sanskritText, 100);
+            }, kalyugText.length * 100);
         };
     </script>
 </body>
