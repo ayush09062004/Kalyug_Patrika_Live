@@ -40,12 +40,6 @@
             color: black;
         }
 
-        .quote-container {
-            display: none;
-            text-align: center;
-            margin-top: 10px;
-        }
-
         #animated-text-sanskrit {
             font-size: 2rem;
             display: inline-block;
@@ -55,7 +49,7 @@
             border-radius: 5px;
         }
 
-        #quote-translation {
+        #animated-text-translation {
             font-size: 1.5rem;
             color: black;
             font-weight: bold;
@@ -63,8 +57,7 @@
         }
 
         .button-container {
-            display: none;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .btn-custom {
@@ -73,6 +66,15 @@
             font-size: 1.2rem;
             font-weight: bold;
             border-radius: 5px;
+        }
+
+        /* Fixing navbar */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: white !important;
         }
     </style>
 </head>
@@ -95,17 +97,18 @@
 
     <div class="animated-text-container">
         <div class="animated-text" id="animated-text-kalyug"></div>
-
-        <div class="quote-container" id="quote-container">
-            <div class="animated-text" id="animated-text-sanskrit"></div>
-            <div id="quote-translation">One must know and speak the truth; listening to the truth removes ignorance.</div>
-        </div>
+        <div class="animated-text" id="animated-text-sanskrit"></div>
+        <div class="animated-text" id="animated-text-translation"></div>
     </div>
 
-    <div class="button-container text-center" id="button-container">
+    <div class="button-container text-center">
         <a href="explore.html" class="btn btn-primary btn-custom">Explore</a>
         <a href="narad-net.html" class="btn btn-secondary btn-custom">Narad.Net</a>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
         function typeWriter(element, text, speed, callback) {
@@ -124,16 +127,15 @@
         window.onload = function() {
             const kalyugText = "कलयुग पत्रिका";
             const sanskritText = "सत्यं ज्ञेयमिति ब्रूयात्, सत्यं श्रुत्वा न मुह्यति ||";
-            
+            const translationText = "One must know and speak the truth; listening to the truth removes ignorance.";
+
             const animatedTextKalyug = document.getElementById("animated-text-kalyug");
             const animatedTextSanskrit = document.getElementById("animated-text-sanskrit");
-            const quoteContainer = document.getElementById("quote-container");
-            const buttonContainer = document.getElementById("button-container");
+            const animatedTextTranslation = document.getElementById("animated-text-translation");
 
             typeWriter(animatedTextKalyug, kalyugText, 100, function() {
-                quoteContainer.style.display = "block"; // Show Sanskrit quote
                 typeWriter(animatedTextSanskrit, sanskritText, 100, function() {
-                    buttonContainer.style.display = "block"; // Show buttons after Sanskrit quote
+                    typeWriter(animatedTextTranslation, translationText, 50);
                 });
             });
         };
