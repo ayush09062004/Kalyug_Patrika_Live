@@ -15,15 +15,11 @@
         /* Custom CSS for full-page background image */
         body {
             background-image: url('fbg.jpg');
-            /* Path to your background image */
             background-size: cover;
-            /* Cover the entire page */
             background-position: center;
-            /* Center the background image */
             background-repeat: no-repeat;
-            /* Do not repeat the image */
             background-attachment: fixed;
-            /* Fix the background while scrolling */
+            font-family: 'Tiro Devanagari Hindi', serif;
         }
 
         /* Custom CSS for animated text container */
@@ -33,7 +29,6 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            /* Center the content horizontally */
         }
 
         /* Custom CSS for animated text */
@@ -42,96 +37,107 @@
             font-family: 'Tiro Devanagari Hindi', serif;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             white-space: nowrap;
-            /* Prevent text from wrapping */
             overflow: hidden;
-            /* Clip overflowing text */
+            display: inline-block;
         }
 
         #animated-text-kalyug {
             font-size: 8rem;
             display: block;
-            /* Ensure it takes full width */
             margin-bottom: 10px;
-            /* Add 10px gap below Kalyug Patrika */
             color: black;
         }
 
         #animated-text-sanskrit {
             font-size: 2rem;
-            /* Smaller font size for Sanskrit */
-            display: inline-block;
-            /* Change to inline-block */
             padding: 10px;
-            /* Add padding for spacing */
-            background-color:rgb(93, 57, 0,0.65);
-            /* Semi-transparent black background */
+            background-color: rgb(93, 57, 0, 0.65);
             color: white;
-            /* White text color */
             border-radius: 5px;
         }
 
+        #animated-text-english {
+            font-size: 1.5rem;
+            padding: 10px;
+            background-color: rgb(93, 57, 0, 0.65);
+            color: white;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
 
-        /* Custom CSS to center the navbar brand and align links to the right */
+        /* Style for the buttons (Explore and Narad.Net) */
+        .button-container {
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+
+        .button-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin: 0 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Custom CSS to match narad-net.html's navbar */
         .navbar {
             position: relative;
-            /* Make the navbar a positioning context */
             display: flex;
             justify-content: center;
-            /* Center the navbar content horizontally */
             align-items: center;
-            /* Center the navbar content vertically */
             padding: 1.5rem 1rem;
-            /* Increase padding to increase navbar height */
             height: 80px;
-            /* Set a fixed height for the navbar */
             font-family: "Times New Roman", Times, serif;
-            background: rgb(93, 57, 0, 0.8);
+            background: rgb(93, 57, 0, 0.8); /* Updated background color */
         }
 
         .navbar-brand {
             position: absolute;
-            /* Position the brand absolutely */
             left: 50%;
-            /* Move the brand to the center */
             transform: translateX(-50%);
-            /* Adjust for the brand's width */
             font-size: 2rem;
-            /* Adjust font size if needed */
             font-weight: bold;
-            /* Make the brand text bold */
             color: white !important;
-            /* Black color for the brand text */
         }
 
         .navbar-nav .nav-link {
             font-weight: bold;
-            /* Make the links bold */
             color: white !important;
-            /* Black color for the links */
         }
 
         .navbar-nav .nav-link:hover {
             color: blue !important;
-            /* Slightly darker black on hover */
         }
 
         .navbar-collapse {
             position: absolute;
-            /* Position the collapse absolutely */
             right: 0;
-            /* Align the collapse to the right */
         }
 
         .navbar-nav .nav-item {
             margin-left: 1rem;
-            /* Add spacing between nav items */
+        }
+
+        /* Custom CSS to white the toggle icon */
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
     </style>
 </head>
 
 <body class="bg-gray-100">
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top">
         <a class="navbar-brand" href="index.html">KALYUG PATRIKA</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -154,10 +160,17 @@
         </div>
     </nav>
 
-    <!-- Animated Texts -->
+    <!-- Animated Texts and Buttons -->
     <div class="animated-text-container">
         <div class="animated-text" id="animated-text-kalyug"></div>
         <div class="animated-text" id="animated-text-sanskrit"></div>
+        <div id="animated-text-english" class="animated-text"></div>
+
+        <!-- Button Container -->
+        <div class="button-container">
+            <a href="explore.html" class="explore-button">Explore</a>
+            <a href="narad-net.html" class="explore-button">Narad.Net</a>
+        </div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->
@@ -168,28 +181,52 @@
     <!-- JavaScript for Letter-by-Letter Animation -->
     <script>
         // Function to animate text letter by letter
-        function typeWriter(element, text, speed) {
+        function typeWriter(element, text, speed, callback) {
             let i = 0;
+            element.innerHTML = ""; // Clear the element before animation
             let interval = setInterval(function() {
                 if (i < text.length) {
                     element.innerHTML += text.charAt(i);
                     i++;
                 } else {
                     clearInterval(interval);
+                    callback();
                 }
             }, speed);
+        }
+
+        // Function to display the full translation at once
+        function displayFullText(element, text, callback) {
+            element.innerHTML = text;
+            if (callback) {
+                callback();
+            }
         }
 
         // Animate the texts on page load
         window.onload = function() {
             const kalyugText = "कलयुग पत्रिका";
-            const sanskritText = "सत्यं ज्ञेयमिति ब्रूयात्, सत्यं श्रुत्वा न मुह्यति ||";
+            const sanskritText = "सत्यं ज्ञेयमिति ब्रूयात्, सत्यं श्रुत्वा न मुह्यति";
+            const englishText = "One must know and speak the truth; listening to the truth removes ignorance.";
 
             const animatedTextKalyug = document.getElementById("animated-text-kalyug");
             const animatedTextSanskrit = document.getElementById("animated-text-sanskrit");
+            const animatedTextEnglish = document.getElementById("animated-text-english");
+            const buttonContainer = document.querySelector('.button-container');
 
-            typeWriter(animatedTextKalyug, kalyugText, 100); // Adjust speed as needed
-            typeWriter(animatedTextSanskrit, sanskritText, 100); // Adjust speed as needed
+            // Hide the button container initially
+            buttonContainer.style.display = 'none';
+
+            typeWriter(animatedTextKalyug, kalyugText, 30, function() {
+                // After Kalyug Patrika is animated, animate Sanskrit text
+                typeWriter(animatedTextSanskrit, sanskritText, 30, function() {
+                    // After Sanskrit text is animated, display English translation at once
+                    displayFullText(animatedTextEnglish, englishText, function() {
+                        // After English translation is displayed, show the buttons
+                        buttonContainer.style.display = 'block';
+                    });
+                });
+            });
         };
     </script>
 </body>
